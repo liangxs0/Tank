@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
-#include <time.h>
+#include <time.h> 
 //里规格：长39*2=78 （真坐标）(假坐标宽为39)  高39
 //外规格：长41*2=82 （真坐标）(假坐标宽为41)  高41
 #define UP    1
@@ -11,7 +11,7 @@
 #define BULLET_NUM 20
 #define MAX_LIFE 4
 
-//程序中未写入函数参数表中且未说明的变量只有map二维数组,level_info数组和level
+//程序中未写入函数参数表中且未说明的变量只有map二维数组,level_info数组和level   
 
 /*
 此程序中涉及的x,y类的坐标值，分为以下两种：
@@ -150,11 +150,11 @@ int main()                               //主函数
 	HideCursor();                         //隐藏光标
 	system("mode con cols=112 lines=42"); //控制窗口大小
 	Frame();                             //打印游戏主体框架
-	Initialize();                         //初始化，全局变量level初值便是1
+	Initialize();                         //初始化，全局变量level初值便是1 
 	//	HANDLE h1 , h2 ;                      //定义句柄变量
 	for (;;)
 	{
-		if (interval[0]++%speed == 0)        //速度调整用,假设interval[0]为a, 语句意为 a % 2==0,a=a+1;
+		if (interval[0]++%speed == 0)        //速度调整用,假设interval[0]为a, 语句意为 a % 2==0,a=a+1; 
 		{
 			GameCheak();                  //游戏胜负检测
 			BulletFly(bullet);
@@ -202,7 +202,7 @@ return 0;
 
 
 void keyboard()
-{               // kbhit()   getch()  用法可用但是不好用
+{               // kbhit()   getch()  用法可用但是不好用            
 	/*
 	函数功能:该函数判断在此函数被调用时,某个键是处于UP状态还是处于DOWN状态,及前次调用GetAsyncKeyState函数后,
 	是否按过此键.如果返回值的最高位被置位,那么该键处于DOWN状态;如果最低位被置位,那么在前一次调用此函数后,此键被按过,
@@ -387,7 +387,7 @@ void BulletFly(Bullet bullet[BULLET_NUM]) //子弹移动和打击
 			if (collide)                                                //如果检测到当前子弹坐标无障碍(无碰撞)（包括在地面上与在水面上）
 				PrintBullet(bullet[i].x, bullet[i].y, collide);       //则打印子弹，若有碰撞则不打印
 			else
-				BulletHit(&bullet[i]);     //若有碰撞则执行子弹碰撞函数
+				BulletHit(&bullet[i]);     //若有碰撞则执行子弹碰撞函数                  
 			if (bullet[i].initial)             //若子弹初建立，则把初建立标记去除
 				bullet[i].initial = 0;
 			for (int j = 0; j< BULLET_NUM; j++)  //子弹间的碰撞判断,若是我方子弹和敌方子弹碰撞则都删除,若为两敌方子弹则无视
@@ -518,7 +518,7 @@ void ClearBullet(int x, int y, int T)   //当前坐标BulletCheak 的值做参量 T
 
 //position为坦克生成位置,-1为左位置,0为中间,1为右,2为我的坦克位置
 void BuildAITank(int* position, Tank* AI_tank)   //执行一次该函数只建立一个坦克
-{                                         //rand函数公式：0<=rand()%(a+1)<=a  0+m<=rand()%(n-m+1)+m<=n
+{                                         //rand函数公式：0<=rand()%(a+1)<=a  0+m<=rand()%(n-m+1)+m<=n  
 	//rand函数实现1到n：1<=rand()%(n)+1<=n
 	if (AIPositionCheak(*position))        //若此位置无障碍,可生成。position参数详见AIPositionCheak函数定义
 	{
@@ -793,7 +793,7 @@ void Stop()    //暂停
 			printf("                     ");
 			break;
 		}
-		else if (GetAsyncKeyState(0x1B) & 0x8000) //Esc键退出
+		else if (GetAsyncKeyState(0x1B) & 0x8000) //Esc键退出	
 			exit(0);
 		Sleep(20);
 	}
@@ -1269,7 +1269,7 @@ void GameOver(bool home)
 			Initialize();        //从本关重新开始
 			break;
 		}
-		else if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出
+		else if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出	
 			exit(0);
 		Sleep(20);
 	}
@@ -1285,7 +1285,7 @@ void NextLevel()
 	{
 		if (timing++ % 10 == 0)
 		{
-			ColorChoose(color);   //颜色选择
+			ColorChoose(color);   //颜色选择   
 			GoToxy(37, 20);        //主屏幕中心打印
 			printf("恭喜过关!");
 			GoToxy(100, 13);       //副屏幕打印
@@ -1307,7 +1307,7 @@ void NextLevel()
 			Initialize();        //初始化从下一关开始,level已++
 			break;
 		}
-		else if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出
+		else if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出	
 			exit(0);
 		Sleep(20);
 	}
@@ -1328,7 +1328,7 @@ void NextLevel()
 			if (++color == 8)
 				color = 1;
 		}
-		if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出
+		if (GetAsyncKeyState(0x1B) & 0x8000)  //Esc键退出	
 			exit(0);
 		Sleep(10);
 	}
@@ -1449,6 +1449,4 @@ void Initialize()      //初始化
 	GoToxy(100, 13);                      //在副屏幕上打印状态
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN);
 	printf("正在游戏");
-	CONSOLE_CURSOR_INFO cursor_info = {1, 0};
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
 }
